@@ -1,0 +1,6 @@
+{
+  "name": "JWE Decryptor",
+  "description": "Securely decrypt and inspect JSON Web Encryption (JWE) tokens directly in your browser.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
