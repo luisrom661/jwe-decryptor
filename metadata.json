@@ -1,6 +1,6 @@
 {
-  "name": "JWE Decryptor",
-  "description": "Securely decrypt and inspect JSON Web Encryption (JWE) tokens directly in your browser.",
+  "name": "JWE & JWT Studio",
+  "description": "Professional tool to inspect, decrypt, sign and encrypt JWE and JWT security tokens.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }
