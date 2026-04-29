@@ -174,6 +174,7 @@ export function useBase64Studio() {
   const encodeText = () => {
     try {
       setOutput(utilsUseCase.base64Encode(input));
+      setDecodeInput('');
       setPreviewUrl(null);
       setError(null);
     } catch (e: any) { setError(e.message); }
@@ -209,11 +210,11 @@ export function useBase64Studio() {
       }
 
       setDecodedType(type);
-      if (type === 'image') {
+      if (type === 'image' || type === 'pdf') {
         const blob = new Blob([bytes], { type: mime });
         setPreviewUrl(URL.createObjectURL(blob));
         setOutput(''); // Clear text output if it's a file
-      } else if (type === 'pdf' || type === 'binary') {
+      } else if (type === 'binary') {
         setOutput('');
         setPreviewUrl(null);
       }
@@ -226,6 +227,7 @@ export function useBase64Studio() {
   };
 
   const decodeText = () => {
+    setInput('');
     detectAndSetDecoded(decodeInput);
   };
 
@@ -243,7 +245,9 @@ export function useBase64Studio() {
       const result = e.target?.result as string;
       const base64 = result.split(',')[1];
       setInput(base64);
-      if (file.type.startsWith('image/')) {
+      setDecodeInput('');
+      setOutput('');
+      if (file.type.startsWith('image/') || file.type === 'application/pdf') {
         setPreviewUrl(result);
       } else {
         setPreviewUrl(null);
@@ -255,6 +259,7 @@ export function useBase64Studio() {
   const encodeFile = () => {
     if (input && mode === 'file') {
       setOutput(input);
+      setDecodeInput('');
       setPreviewUrl(null);
       setDecodedType('text');
       setError(null);

@@ -546,7 +546,7 @@ function Base64Panel({ hook, t, copyToClipboard, copiedSection }: any) {
               )}
             </div>
             <div className="flex gap-2">
-              {(hook.output || hook.previewUrl || ((hook.decodedType === 'pdf' || hook.decodedType === 'binary') && hook.input)) && (
+              {(hook.output || hook.previewUrl || ((hook.decodedType === 'pdf' || hook.decodedType === 'binary') && (hook.input || hook.decodeInput))) && (
                 <>
                   <button onClick={hook.clearOutput} className="p-2 text-slate-400 hover:text-red-500 transition-colors" title={t.clearText}>
                     <Trash2 size={18} />
@@ -569,6 +569,8 @@ function Base64Panel({ hook, t, copyToClipboard, copiedSection }: any) {
           <div className="flex-1 bg-slate-900 rounded-3xl p-6 font-mono text-sm text-indigo-300 break-all overflow-auto shadow-inner border border-white/5 relative flex items-center justify-center">
             {hook.decodedType === 'image' && hook.previewUrl ? (
                 <img src={hook.previewUrl} alt="Preview" className="max-w-full max-h-full object-contain rounded-xl shadow-2xl" />
+            ) : hook.decodedType === 'pdf' && hook.previewUrl ? (
+                <iframe src={hook.previewUrl} title="PDF Preview" className="w-full h-full rounded-xl shadow-2xl bg-white" />
             ) : hook.output ? (
                 <pre className="w-full h-full whitespace-pre-wrap leading-relaxed">{hook.output}</pre>
             ) : hook.decodedType === 'pdf' || hook.decodedType === 'binary' ? (
